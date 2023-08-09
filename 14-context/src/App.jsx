@@ -1,11 +1,13 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useTheme } from "./useTheme";
 import AdoptedPetContext from "./AdoptedPetContext";
 import Details from "./Details";
 import SearchParams from "./SearchParams";
 import Navbar from "./Navbar";
+// import setThemeFromLocal from "./useTheme";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,24 +20,15 @@ const queryClient = new QueryClient({
 
 const App = () => {
   const adoptedPet = useState(null);
-  const [theme, setTheme] = useState("light");
-  const toggleTheme = () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  };
-  useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <div className="App">
       <BrowserRouter>
         <AdoptedPetContext.Provider value={adoptedPet}>
           <QueryClientProvider client={queryClient}>
-            <Navbar />
-            <button onClick={toggleTheme}> Toggle</button>
+            <Navbar theme={theme} toggleTheme={toggleTheme} />
+
             <Routes>
               <Route path="/details/:id" element={<Details />} />
               <Route path="/" element={<SearchParams />} />

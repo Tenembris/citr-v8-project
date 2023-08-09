@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "./useTheme";
 
 const NavBar = () => {
+  const { theme, toggleTheme } = useTheme();
   return (
     <nav>
       <ul>
@@ -17,7 +19,9 @@ const NavBar = () => {
           <Link to="/about">About</Link>
         </li>
         <li>
-          <button>Dark Mode</button>
+          <button onClick={toggleTheme}>
+            {theme === "light" ? "Dark Mode" : "Light Mode"}
+          </button>
         </li>
       </ul>
     </nav>
