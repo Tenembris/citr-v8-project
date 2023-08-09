@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   color: #333;
+  margin: 0;
 }
 
 body {
@@ -365,3 +366,57 @@ form .pet {
   font-size: 34px;
 }
 
+/* navbar */
+nav {
+  background-color: #333;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+a:hover {
+  color: lightgray;
+}
+
+.mainLogo {
+  position: relative;
+  display: inline-block;
+  width: 279px;
+  height: 76px;
+  overflow: hidden;
+  left: -35%;
+  transform: scale(0.6);
+}
+
+.mainLogo img {
+  filter: brightness(150%);
+}
+
+li {
+  margin: 0;
+  color: white;
+  gap: 20px;
+}
+
+.dark {
+  background-image: url(./OSIF9T0.jpg);
+  color: red;
+}
+
+.light {
+  background-image: url(http://pets-images.dev-apis.com/pets/wallpaperB.jpg);
+  color: blue;
+}
