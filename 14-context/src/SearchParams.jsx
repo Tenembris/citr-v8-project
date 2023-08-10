@@ -11,12 +11,14 @@ const SearchParams = () => {
     location: "",
     animal: "",
     breed: "",
+    page: 0,
   });
   const [adoptedPet] = useContext(AdoptedPetContext);
   const [animal, setAnimal] = useState("");
   const [breeds] = useBreedList(animal);
+  const [pageNumber] = useState(0);
 
-  const results = useQuery(["search", requestParams], fetchSearch);
+  const results = useQuery(["search", requestParams, pageNumber], fetchSearch);
   const pets = results?.data?.pets ?? [];
 
   return (
@@ -29,6 +31,7 @@ const SearchParams = () => {
             animal: formData.get("animal") ?? "",
             breed: formData.get("breed") ?? "",
             location: formData.get("location") ?? "",
+            page: requestParams.page,
           };
           setRequestParams(obj);
         }}
@@ -78,6 +81,28 @@ const SearchParams = () => {
 
         <button>Submit</button>
       </form>
+      <button
+        onClick={() => {
+          if (requestParams.page > 0) {
+            setRequestParams({
+              ...requestParams,
+              page: requestParams.page - 1,
+            });
+          }
+        }}
+      >
+        Previous Page
+      </button>
+      <button
+        onClick={() => {
+          setRequestParams({
+            ...requestParams,
+            page: requestParams.page + 1,
+          });
+        }}
+      >
+        Next Page
+      </button>
       <Results pets={pets} />
     </div>
   );
