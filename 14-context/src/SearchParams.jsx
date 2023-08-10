@@ -81,29 +81,37 @@ const SearchParams = () => {
 
         <button>Submit</button>
       </form>
-      <button
-        onClick={() => {
-          if (requestParams.page > 0) {
-            setRequestParams({
-              ...requestParams,
-              page: requestParams.page - 1,
-            });
-          }
-        }}
-      >
-        Previous Page
-      </button>
-      <button
-        onClick={() => {
-          setRequestParams({
-            ...requestParams,
-            page: requestParams.page + 1,
-          });
-        }}
-      >
-        Next Page
-      </button>
-      <Results pets={pets} />
+
+      <div>
+        <Results pets={pets} />
+        <div className="PagingContainer">
+          <div className="PagingButtons">
+            <button
+              onClick={() => {
+                if (requestParams.page > 0) {
+                  setRequestParams({
+                    ...requestParams,
+                    page: requestParams.page - 1,
+                  });
+                }
+              }}
+            >
+              Previous Page
+            </button>
+            <p>{requestParams.page + 1}</p>
+            <button
+              onClick={() => {
+                setRequestParams({
+                  ...requestParams,
+                  page: requestParams.page + 1,
+                });
+              }}
+            >
+              Next Page
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
